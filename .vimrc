@@ -40,6 +40,7 @@ set nowrap
 
 " Display relative lines numbers
 set rnu
+set number
 
 " set F5 to toggle 'paste' mode
 set pastetoggle=<F5>
@@ -79,6 +80,15 @@ let php_htmlInStrings = 1
 let php_sql_query = 1      
 "Disable PHP short tags.
 let php_noShortTags = 1    
+
+" Add a visual indicator for 80 and 120 characters mark
+let &colorcolumn="80,".join(range(120,999),",")
+
+"set highlight color to dark grey
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
+
+"enable php autocompletion
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 """""""""""""""""""""""""""""""""
 " ADVANCED PROGRAMMING SETTINGS "
