@@ -26,9 +26,6 @@ set enc=utf-8
 "Set file format to unix ;)
 set fileformat=unix
 
-"Enabling folding
-"set foldmethod=syntax
-
 " Enable incremental search
 set incsearch
 
@@ -76,14 +73,31 @@ set wildmenu
 "   - on second <Tab>, complete the next full match and show menu
 set wildmode=list:longest,full
 
+"Enabling folding
+"set foldmethod=syntax
+
 "Set PHP folding of classes and functions.
-let php_folding = 1        
+let php_folding = 1
 "Syntax highlight HTML code inside PHP strings.
-let php_htmlInStrings = 1  
+let php_htmlInStrings = 1
 "Syntax highlight SQL code inside PHP strings.
-let php_sql_query = 1      
+let php_sql_query = 1
 "Disable PHP short tags.
-let php_noShortTags = 1    
+let php_noShortTags = 1
+
+
+" Code Sniffer 
+" Pass arguments to phpcs binary
+let g:phpqa_codesniffer_args = "--standard=PSR2"
+
+"  " Run codesniffer on save (default = 1)
+let g:phpqa_codesniffer_autorun = 0
+
+"  Mess detector
+"  let g:phpqa_messdetector_ruleset = "/path/to/phpmd.xml"
+
+"  " Run mess detector on save (default = 1)
+"  let g:phpqa_messdetector_autorun = 0
 
 " Add a visual indicator for 80 and 120 characters mark
 let &colorcolumn="80,".join(range(120,999),",")
@@ -93,6 +107,21 @@ highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 "enable php autocompletion
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+
+"enable templates
+autocmd BufNewFile * silent! 0r $HOME/.vim/templates/skeleton.%:e
+
+"deactivate arrow keys
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
+
+imap jj <Esc>
 
 """""""""""""""""""""""""""""""""
 " ADVANCED PROGRAMMING SETTINGS "
@@ -114,7 +143,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
+"Bundle 'joonty/vim-phpqa.git'
 Bundle 'joonty/vdebug.git'
 
 " All of your Plugins must be added before the following line
